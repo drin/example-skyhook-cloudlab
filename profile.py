@@ -17,19 +17,23 @@ request_rspec  = portal_context.makeRequestRSpec()
 client0 = request_rspec.RawPC("node")
 client0.hardware_type = 'c220g5'
 client0.disk_image    = 'urn:publicid:IDN+emulab.net+image+emulab-ops//CENTOS7-64-STD'
+client_interface      = client0.addInterface('interface-client')
 
 
 # Provision osd0 (ceph OSD) hardware
 osd0 = request_rspec.RawPC("node")
 osd0.hardware_type = 'c220g5'
 osd0.disk_image    = 'urn:publicid:IDN+emulab.net+image+emulab-ops//CENTOS7-64-STD'
+osd_interface      = osd0.addInterface('interface-osd')
 
 # Add services
 # client0.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 # osd0.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
 # Add client0 and osd0 to the same LAN (create a link between them)
-cluster_lan = request_rspec.Link(members=(client0, osd0))
+cluster_lan = request_rspec.LAN('lan')
+cluster_lan.addInterface(client_interface)
+cluster_lan.addInterface(osd0_interface)
 
 # Print the RSpec to the enclosing page.
 portal_context.printRequestRSpec(request_rspec)
