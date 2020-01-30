@@ -6,8 +6,8 @@ Wait for the profile instance to start, then click on the node in the topology a
 """
 
 # The Portal object and ProtoGENI library.
-from geni.portal import portal
-from geni.rspec import pg
+import geni.portal as portal
+import geni.rspec.pg as pg
 
 # Create a portal context, create a request object, and add a raw PC to the request
 portal_context = portal.Context()
