@@ -33,7 +33,7 @@ osd_interface      = osd0.addInterface('interface-osd')
 # Add client0 and osd0 to the same LAN (create a link between them)
 cluster_lan = request_rspec.LAN('lan')
 cluster_lan.addInterface(client_interface)
-cluster_lan.addInterface(osd0_interface)
+cluster_lan.addInterface(osd_interface)
 
 # Print the RSpec to the enclosing page.
 portal_context.printRequestRSpec(request_rspec)
